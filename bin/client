@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+
+var io = require("socket.io-client");
+const socket = io.connect('http://localhost:3000');
+
+socket.on('connect', function (data) {
+//    socket.emit('connection');
+});
+
+socket.on('game_status', function (data) {
+    fight.state = data.state;
+});
+socket.on('new_connexion', function (data) {
+    console.log(data);
+    socket.emit('recu', {reception: 'OK'});
+});
+socket.on('new_viewer', function () {
+    console.log("Un nouveau spectateur est arrivé");
+});
+socket.on('new_player', function () {
+    console.log("Un nouveau joueur est arrivé");
+});
